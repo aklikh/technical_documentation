@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>A Technical Documentation Page</title>
+        
+        <link rel="stylesheet" href="css/style.css">
+    </head> 
+  
+    <body>
+              
+        <!--navigation-->
+        <nav id="navbar">
+
+            <!--navigation header-->
+            <header id="nav-header">
+                
+                <h1 id="plumber-header"> Plumber</h1>
+                <img id="logo_img" src="https://raw.githubusercontent.com/batchcorp/plumber/master/assets/gopher.png" alt="Gopher icon">
+
+            </header>
+
+            <!--navigation parts-->
+            <ul>
+                <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+
+                <li><a class="nav-link" href="#Why_do_you_need_it?">Why do you need it?</a></li>
+
+                <li><a class="nav-link" href="#Demo">Demo</a></li>
+
+                <li><a class="nav-link" href="#Install">Install</a></li>
+
+                <li><a class="nav-link" href="#Usage">Usage</a></li>
+
+                <li><a class="nav-link" href="#Getting_Help">Getting Help</a></li> 
+
+                <li><a class="nav-link" href="#Features">Features</a></li>
+
+                <li><a class="nav-link" href="#Hmm,_what_is_this_Batch_thing?">Hmm, what is this Batch thing?</a></li>
+
+                <li><a class="nav-link" href="#Why_the_name_plumber?">Why the name plumber?</a></li>
+
+                <li><a class="nav-link" href="#Supported_Messaging_Systems">Supported Messaging Systems</a></li>
+
+                <li><a class="nav-link" href="#High_Availability">High Availability</a></li>
+
+                <li><a class="nav-link" href="#Acknowledgments">Acknowledgments</a></li>
+
+                <li><a class="nav-link" href="#Release">Release</a></li>
+
+                <li><a class="nav-link" href="#Contribute">Contribute</a></li>
+
+                <li><a class="nav-link" href="#Reference">Reference</a></li>
+            </ul>
+
+        </nav>
+
+        <!--main container-->
+        <main id="main-doc">
+
+            <!--Introduction-->
+            <section class="main-section" id="Introduction">
+
+                <header><h2>Introduction</h2></header>
+                <p>Plumber is a CLI devtool for inspecting, piping, massaging and redirecting data in message systems like Kafka, RabbitMQ , GCP PubSub and many more. [1]</p>     
+                <p>The tool enables you to:</p>
+
+                <ul>
+                    <li>See what's passing through your message systems</li>
+                    <li>Pipe data from one place to another</li>
+                    <li>Decode protobuf data in real-time</li>
+                    <li>Capture and relay data to <a
+                    href="https://batch.sh/"
+                    target="_blank"
+                    >Batch platform</a></li>
+                    <li>Ship change data capture events to <a
+                    href="https://batch.sh/"
+                    target="_blank"
+                    >Batch platform</a></li>            
+                </ul>
+
+                <p id="footnote">[1] It's like <code class="in-line">curl</code> for messaging systems.</p>     
+
+            </section> 
+            
+            <!--Why do you need it?-->
+            <section class="main-section" id="Why_do_you_need_it?">
+
+                <header><h2>Why do you need it?</h2></header>
+
+                <p>Messaging systems are black boxes - gaining visibility into what is passing through them is an involved process that requires you to write consumer code that you will likely throw away.</p>
+
+                <p><code class="in-line">plumber</code> enables you to stop wasting time writing throw-away code - use it to look into your queues, use it to connect disparate systems together or use it for debugging your event driven systems.</p>
+            </section> 
+
+            <!--Demo-->
+            <section class="main-section" id="Demo">
+
+                <header><h2>Demo</h2></header>
+
+                <img id="gif" src="https://raw.githubusercontent.com/batchcorp/plumber/master/assets/demo.gif" alt="Demo gif">
+
+            </section>
+
+            <!--Install-->   
+            <section class="main-section" id="Install">
+
+                    <header><h2>Install</h2></header>
+                    <h3>Via brew</h3>
+
+                    <code class="multi-line"> 
+        $ brew tap batchcorp/public 
+        $ brew install plumber
+                    </code>
+
+                    <h3>Manually</h3>
+                    <ul>
+                        <li><a href="https://github.com/batchcorp/plumber/releases/latest/download/plumber-darwin" target="_blank">macOS</a></li>
+
+                        <li><a href="https://github.com/batchcorp/plumber/releases/latest/download/plumber-linux" target="_blank">Linux</a></li>
+
+                        <li> <a href="https://github.com/batchcorp/plumber/releases/latest/download/plumber-windows.exe" target="_blank">Windows</a></li>            
+                    </ul>
+                    
+                    <p>Plumber is a single binary, to install you simply need to download it, give it executable permissions and call it from your shell. Here's an example set of commands to do this:</p>
+
+                    <code class="multi-line">
+        $ curl -L -o plumber https://github.com/batchcorp/plumber/releases/latest/download/plumber-darwin 
+        $ chmod +x plumber 
+        $ mv plumber /usr/local/bin/plumber
+                    </code>        
+            </section> 
+
+            <!--Usage-->   
+            <section class="main-section" id="Usage">
+
+                    <header><h2>Usage</h2></header>
+                    <p>Keep it simple: Read & write messages</p>
+
+                    <code class="multi-line">
+        $ plumber read kafka --topic orders --address="some-machine.domain.com:9092" --line-numbers --follow
+        1: {"sample" : "message 1"}
+        2: {"sample" : "message 2"}
+        3: {"sample" : "message 3"}
+        4: {"sample" : "message 4"}
+        5: {"sample" : "message 5"}
+        6: {"sample" : "message 6"}
+        7: {"sample" : "message 7"}
+        8: {"sample" : "message 8"}
+        9: {"sample" : "message 9"}
+        10: {"sample" : "message 10"}
+        11: {"sample" : "message 11"}
+        ^C
+
+        $ plumber write kafka --address="some-machine.domain.com:9092" --topic orders --input-data "plain text"
+        Success! Wrote '1' message(s) to 'localhost:9092'.
+                    </code>
+
+                    <p id="footnote">NOTE: If you want to write JSON either surround the <code class="in-line">input-data</code> in single quotes or use <code class="in-line">input-file</code>.</p>  
+
+                    <p>See <a href="https://github.com/batchcorp/plumber/blob/master/EXAMPLES.md" target="_blank">EXAMPLES.md</a> for more usage examples</p> 
+
+                    <p>See <a href="https://github.com/batchcorp/plumber/blob/master/ENV.md" target="_blank">ENV.md</a> for list of supported environment variables</p> 
+            </section>
+
+            <!--Gettinf Help--> 
+            <section class="main-section" id="Getting_Help">
+
+                    <header><h2>Getting Help</h2></header>
+                    <p>A full list of available flags can be displayed by using the <code class="in-line">--help</code> flag after different parts of the command:</p>
+
+                    <code class="multi-line">
+        $ plumber read rabbit --help
+        $ plumber read mqtt --help
+        $ plumber write kafka --help
+        $ plumber relay --help
+                    </code> 
+
+            </section> 
+
+            <!--Features-->   
+            <section class="main-section" id="Features">
+
+                    <header><h2>Features</h2></header>
+
+                    <ul>
+                        <li>Dynamic protobuf & avro encode & decode</li>
+                        <li>Gzip compress & decompress</li>
+                        <li><code class="in-line">--follow</code> support (ie. <code class="in-line">tail -f</code>)</li>
+                        <li>Observe, relay and archive messaging data</li>
+                        <li>Support for most messaging systems</li> 
+                        <li>Single-binary, zero-config, easy-install</li>
+                    </ul>
+
+            </section> 
+
+            <!--Hmm, what is this Batch thing?-->   
+            <section class="main-section" id="Hmm,_what_is_this_Batch_thing?">
+                
+                    <header><h2>Hmm, what is this Batch thing?</h2></header>
+                    <p>We are distributed system enthusiasts that started a company called <a href="https://batch.sh/" target="_blank">Batch</a>. We focus on improving workflows that involve messaging systems - specifically, we enable message observability, backups and outage recovery via message replays.</p>
+
+                    <p>While working on our company, we built a tool for reading and writing messages from our message systems and realized that there is a serious lack of tooling in this space.</p>
+
+                    <p>We wanted a swiss army knife type of tool for working with messaging systems (we use Kafka and RabbitMQ internally), so we created <code class="in-line">plumber</code>.</p>
+            </section> 
+
+            <!--Why the name plumber--> 
+            <section class="main-section" id="Why_the_name_plumber?">
+                    <header><h2>Why the name <code class="in-line">plumber</code>?</h2></header>
+                    <p>We consider ourselves "internet plumbers" of sort - so the name seemed to fit :)</p> 
+            </section> 
+
+            <!--Supported Messaging Systems-->   
+            <section class="main-section" id="Supported_Messaging_Systems">
+
+                    <header><h2>Supported Messaging Systems</h2></header>
+                    <ul>
+                        <li>Kafka</li>
+                        <li>RabbitMQ</li>
+                        <li>Google Cloud Platform PubSub</li> 
+                        <li>MQTT</li>
+                        <li>Amazon SQS</li>
+                        <li>Amazon SNS (Publishing)</li>
+                        <li>ActiveMQ</li>
+                        <li>Azure Service Bus</li>
+                        <li>Azure Event Hub</li>
+                        <li>NATS</li>
+                        <li>NATS Streaming (Jetstream)</li>
+                        <li>Redis-PubSub</li>
+                        <li>Redis-Streams</li>
+                        <li>Postgres CDC (Change Data Capture)</li>
+                        <li>MongoDB CDC (Change Data Capture)</li>
+                        <li>Apache Pulsar</li>           
+                    </ul>
+
+                    <p>NOTE: If your messaging tech is not supported - submit an issue and we'll do our best to make it happen!</p>
+
+            </section> 
+
+            <!--High Availability--> 
+            <section class="main-section" id="High_Availability">
+
+                    <header><h2>High Availability</h2></header>
+                    <p>When running <code class="in-line">plumber</code> in relay mode in production, you will want to run at least 2 instances of <code class="in-line">plumber</code> - that way updates, maintenances or unexpected problems will not interfere with data collection.</p> 
+                    <p>You can achieve H/A by launching 2+ instances of plumber with identical configurations.</p> 
+
+                    <h3>Kafka</h3>
+                    <p>You need to ensure that you are using the same consumer group on all plumber instances.</p> 
+
+                    <h3>RabbitMQ</h3>
+                    <p>Make sure that all instances of <code class="in-line">plumber</code> are pointed to the same queue.</p> 
+
+                    <h3>Note on boolean flags</h3>
+                    <p>In order to flip a boolean flag to <code class="in-line">false</code>, prepend <code class="in-line">--no</code> to the flag.</p> 
+                    <p>ie. <code class="in-line">--queue-declare</code> is <code class="in-line">true</code> by default. To make it false, use <code class="in-line">--no-queue-declare</code>.</p>  
+
+            </section> 
+
+            <!--Acknowledgments--> 
+            <section class="main-section" id="Acknowledgments">
+
+                    <header><h2>Acknowledgments</h2></header>
+                    <p>Huge shoutout to <a href="https://github.com/jhump" target="_blank">jhump</a> and for his excellent <a href="https://github.com/jhump/protoreflect" target="_blank">protoreflect</a> library, without which plumber would not be anywhere near as easy to implement. <i>Thank you!</i></p> 
+                
+            </section> 
+
+            <!--Release--> 
+            <section class="main-section" id="Release">
+
+                <header><h2>Release</h2></header>
+                <p>To push a new plumber release:</p> 
+                <ol>
+                    <li><code class="in-line">git tag v0.18.0 master</code></li>
+                    <li><code class="in-line">git push origin v0.18.0</code></li>
+                    <li>Watch the github action</li>
+                    <li>New release should be automatically created under <a href="https://github.com/batchcorp/plumber/releases/" target="_blank">https://github.com/batchcorp/plumber/releases/</a></li>
+                    <li>Update release to include any relevant info</li> 
+                </ol>
+            </section> 
+
+            <!--Contribute--> 
+            <section class="main-section" id="Contribute">
+
+                <header><h2>Contribute</h2></header>
+                <p>We love contributions! Prior to sending us a PR, open an issue to discuss what you intend to work on. When ready to open PR - add good tests and let's get this thing merged!</p> 
+            </section> 
+
+            <!--Reference-->  
+            <section class="main-section" id="Reference">
+
+                <header><h2>Reference<h2></header>
+                <p>All the documentation in this page is taken from <a
+                    href="https://github.com/batchcorp/plumber/blob/master/README.md"
+                    target="_blank"
+                    >here</a >
+                </p>
+            </section> 
+
+        </main> 
+        
+        
+    </body>  
+  
+  
+</html>   

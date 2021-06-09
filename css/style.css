@@ -1,0 +1,92 @@
+#sections{
+    display:flex;
+}
+  
+#start{
+    text-align: center;
+}
+
+#gif{   
+    width:650px;
+}
+
+#nav-header{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#logo_img{
+    width:100%; 
+    height:220px;
+    border-radius: 30%;
+    border: 2px solid #555;
+}
+
+
+#footnote{
+    font-size: 12px;
+}
+
+li{
+    margin:5px 0 5px 0;
+}
+
+#navbar {
+    position: fixed;
+    min-width: 210px;
+    top: 0px;
+    left: 10px;
+    width: 240px;
+    height: 100%;
+    border-right: solid;
+    border-color: gray;
+    text-align: left;
+    padding:7px;
+}
+
+
+#main-doc{
+    position: absolute;
+    padding-left: 300px;
+}
+
+header {
+    color: black;
+    margin: 5px 10px 5px 0;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.in-line{
+    background-color: #f7f7f7;
+    border-radius: 5px; 
+    filter: brightness(95%);
+    padding: 0 3px 0 3px;
+}
+
+.multi-line{
+    display: block;
+    text-align: left;
+    position: relative;
+    background-color: #f7f7f7;
+    filter: brightness(95%);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 10px 20px 0;
+    white-space: pre-wrap   
+}
+
+a{
+    text-decoration: none;
+    color: #20B2AA;
+}
+ 
+
+
+@media (min-width: 300px) {
+    :root {
+        --size-divisor: 4;
+    }
+}
